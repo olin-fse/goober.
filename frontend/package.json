@@ -1,28 +1,16 @@
 {
   "name": "frontend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --config dev.js --watch",
-    "build": "webpack -p --config prod.js"
-  },
-  "author": "",
-  "license": "ISC",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "babel-core": "6.26.0",
-    "babel-loader": "7.1.2",
-    "babel-preset-env": "1.6.1",
-    "babel-preset-react": "6.24.1",
-    "compression-webpack-plugin": "1.1.6",
-    "css-loader": "0.28.9",
-    "less": "2.7.3",
-    "less-loader": "4.0.5",
-    "path": "0.12.7",
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
-    "style-loader": "0.20.1",
-    "webpack": "3.10.0"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }

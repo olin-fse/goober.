@@ -1,4 +1,11 @@
+
+# sync node_modules by npm install
 node_modules
+
+# sync python virtual environment with requirements.txt
 /venv
 *.log
 *.pyc
+
+# these are the bundle js file produced for production, no need to version control
+/assets

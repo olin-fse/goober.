@@ -1,0 +1,25 @@
+{
+  "name": "goober.",
+  "version": "1.0.0",
+  "description": "Goober. is an online events organization service for small local communities. Goober supports users like pick-up sports players, acquaintances, meetup group organizers to create, share, and join upcoming events.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olin-fse/goober..git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olin-fse/goober./issues"
+  },
+  "homepage": "https://github.com/olin-fse/goober.#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^5.0.3",
+    "path": "^0.12.7"
+  }
+}

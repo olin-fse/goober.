@@ -4,7 +4,7 @@ Goober. is an online events organization service for small local communities. Go
 ## Setup & How to Run
 
 1. Backend (NodeJS)
-  -
+  - `npm run start`
 
 2. Frontend (React & Webpack)
   - `npm install` to install node_modules listed in package.json

@@ -14,3 +14,4 @@ Goober. is an online events organization service for small local communities. Go
   - Run `npm install --save` to add new node_modules
 
 3. Database (MongoDB with Mongoose)
+ - `sudo service mongod start`

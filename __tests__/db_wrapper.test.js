@@ -1,8 +1,8 @@
 const db = require('../db_wrapper');
 const request = require('supertest')
 
-// describe('Test the root path', () => {
-//     test('It should response the GET method with 200', (done) => {
+// describe('Test Mongodb connection', () => {
+//     test('It should respond with', (done) => {
 //         db.connectToDB.then((res) => {
 //             expect().toBe();
 //             done();

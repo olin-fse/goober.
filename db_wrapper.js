@@ -1,8 +1,15 @@
 const mongoose = require('mongoose');
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/goober';
+const mongoTestURI = 'mongodb://localhost/test';
 mongoose.Promise = global.Promise;
 
-connectToDB(mongoURI);
+// jest will use NODE_ENV=test for testing
+if(process.env.NODE_ENV == 'test'){
+  connectToDB(mongoTestURI);
+}
+else{
+  connectToDB(mongoURI);
+}
 
 const Goo = require('./models/Goo');
 var db_wrapper = {}; // wrapper for database module

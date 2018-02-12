@@ -73,3 +73,4 @@ class GooForm extends Component {
     );
   }
 }
+export default GooForm;

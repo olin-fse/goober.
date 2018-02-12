@@ -13,7 +13,7 @@ describe('Test the /goos path', () => {
     test('It should response the GET request with 200 with a JSON', (done) => {
         request(app).get('/goos').then((res) => {
             expect(res.statusCode).toBe(200);
-            expect(res.header['content-type']).toBe("application/json; charset=utf-8")
+            expect(res.header['content-type']).toBe('application/json; charset=utf-8')
             done();
         });
     });

@@ -4,7 +4,7 @@ const path = require('path');
 const db = require('./db_wrapper');
 const bodyParser = require('body-parser');
 
-const DIST_DIR = path.join(__dirname, "/frontend/public");
+const DIST_DIR = path.join(__dirname, 'frontend/public');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -30,18 +30,22 @@ app.route('/goos')
       people:      req.body.people,
       maxPeople:   req.body.maxPeople,
     };
-    db.Goo.saveGoo(goo).then(function success(gooData) {
+    db.Goo.saveGoo(goo).then(function(gooData) {
       res.status(200).send("new Goo was saved succesfully");
     }, function error(err) {
       res.status(500).send(err);
     });
 });
 
-app.use(express.static(DIST_DIR), function(){
+app.use(express.static(DIST_DIR));
+
+// this allows app to serve api specific json
+app.get('/api*', function (req, res) {
+  res.send('api');
 });
 
-app.get('/', function (req, res) {
-  res.status(200).send('Hello!')
+// app.get('/') will mess up react-router settings
+app.get('*', function (req, res) {
   res.sendFile(path.join(DIST_DIR, 'index.html'));
 });
 

@@ -22,3 +22,5 @@ Jest is the test framework for both backend and frontend.
   - `npm run test`
   - Environment Variable NODE_ENV is set to 'test' (NODE_ENV=test)
 2. Frontend
+  - `cd frontend`
+  - `npm run test`

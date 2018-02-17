@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Input, Button, Row, Col, Icon} from 'react-materialize';
 import axios from 'axios';
 
 class GooForm extends Component {
@@ -38,38 +39,25 @@ class GooForm extends Component {
   }
   render() {
     return (
-      <div>
-        <h2>Create New Goo</h2>
-        <form onSubmit={this.handleSubmit}>
-         <label>
-           Title :
-           <input name='title' type="text" value={this.state.title} onChange={this.handleChange} />
-         </label>
-         <br/>
-         <label>
-           Location :
-           <input name='location' type="text" value={this.state.location} onChange={this.handleChange} />
-         </label>
-         <br/>
-         <label>
-           Description :
-           <textarea name='description' value={this.state.description} onChange={this.handleChange}></textarea>
-         </label>
-         <br/>
-
-         <label>
-           Max People :
-           <select name='maxPeople' value={this.state.maxPeople} onChange={this.handleChange}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-         </label>
-         <br/>
-         <input type="submit" value="Submit" />
-       </form>
-    </div>
+      <Row>
+        <Col s='8'><h5>Create New Goo</h5></Col>
+        <Col>
+          <form>
+            <Input s={8} label='title' name='title' type="text" value={this.state.title} onChange={this.handleChange} />
+            <Input s={8} label='location' name='location' type="text" value={this.state.location} onChange={this.handleChange} />
+            <Input s={12} label='description' name='description' value={this.state.description} onChange={this.handleChange}/>
+            <Input s={3} label='Max People' type='select' defaultValue='2' name='maxPeople' value={this.state.maxPeople} onChange={this.handleChange}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </Input>
+            <Col s={12}>
+              <Button type="submit" value="Submit" onClick={this.handleSubmit}>SUBMIT</Button>
+            </Col>
+          </form>
+        </Col>
+      </Row>
     );
   }
 }

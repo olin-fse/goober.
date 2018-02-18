@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Input, Button, Row, Col, Icon} from 'react-materialize';
+import { Redirect } from 'react-router'
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 
 class GooForm extends Component {
@@ -9,14 +11,24 @@ class GooForm extends Component {
       title : '',
       location : '',
       description : '',
-      startDate : new Date(),
-      endDate : new Date(),
+      startDate : new Date,
+      endDate : new Date,
       tags : [],
       people : [],
       maxPeople : 4,
+      fireRedirect: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.notify = this.notify.bind(this);
+  }
+  notify(){
+    toast("New Goo Created", {
+      type: toast.TYPE.INFO,
+      hideProgressBar: true,
+      pauseOnHover: false,
+      onClose : () => this.setState({fireRedirect: true}),
+    });
   }
   handleChange(event) {
     const target = event.target;
@@ -27,15 +39,15 @@ class GooForm extends Component {
     });
   }
   handleSubmit(event) {
+    event.preventDefault();
     const data = this.state;
     axios.post('/goos', data)
-    .then(function (res){
-      console.log(res);
+    .then(() => {
+      this.notify();
     })
     .catch(function (err) {
       console.log(err);
     });
-    event.preventDefault();
   }
   render() {
     return (
@@ -52,10 +64,18 @@ class GooForm extends Component {
               <option value="3">3</option>
               <option value="4">4</option>
             </Input>
+            <Input label='startDate' name='startDate' type='date' value={this.state.startDate} onChange={this.handleChange} />
+            <Input label='endDate' name='endDate' type='date' value={this.state.endDate} onChange={this.handleChange} />
             <Col s={12}>
               <Button className="blue darken-4" type="submit" value="Submit" onClick={this.handleSubmit}>SUBMIT</Button>
             </Col>
           </form>
+          <ToastContainer autoClose={1000}/>
+          {this.state.fireRedirect && (
+            <div>
+              <Redirect to={'/'}/>
+            </div>
+          )}
         </Col>
       </Row>
     );

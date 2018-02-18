@@ -4,7 +4,7 @@ import {Row, Col} from 'react-materialize';
 
 const Home = () => (
   <Row className='left'>
-    <Col s={6}>
+    <Col s={12}>
       <Goos/>
     </Col>
   </Row>

@@ -10,7 +10,7 @@ const GooSchema = mongoose.Schema({
   endDate:     Date,
   tags:        [], // list of tags (events type)
   people:      [], // list of person id
-  maxPeople:   Number,
+  maxPeople:   Number,  
 });
 
 const GooModel = mongoose.model('Goo', GooSchema);

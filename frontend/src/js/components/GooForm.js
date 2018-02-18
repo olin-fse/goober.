@@ -53,7 +53,7 @@ class GooForm extends Component {
               <option value="4">4</option>
             </Input>
             <Col s={12}>
-              <Button type="submit" value="Submit" onClick={this.handleSubmit}>SUBMIT</Button>
+              <Button className="blue darken-4" type="submit" value="Submit" onClick={this.handleSubmit}>SUBMIT</Button>
             </Col>
           </form>
         </Col>

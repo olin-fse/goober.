@@ -3,8 +3,8 @@ import Goos from './Goos';
 import {Row, Col} from 'react-materialize';
 
 const Home = () => (
-  <Row>
-    <Col offset='s1' s={4}>
+  <Row className='left'>
+    <Col s={6}>
       <Goos/>
     </Col>
   </Row>

@@ -7,6 +7,9 @@ module.exports = function (db){
     .get(function(req, res){
       res.send('api');
     })
+  router.route('/goo/:gooid')
+    .delete(deleteGoo)
+
   router.route('/goos')
     .get(getAllGoos)
     .post(createGoo);
@@ -15,8 +18,8 @@ module.exports = function (db){
     db.Goo.getGoos().then(function (goos) {
       res.send(goos);
     });
-    console.log("gotGoos")
   }
+
   function createGoo(req, res){
     var goo = {
       title:       req.body.title,
@@ -30,6 +33,14 @@ module.exports = function (db){
     };
     db.Goo.saveGoo(goo).then(function(gooData) {
       res.status(200).send("new Goo was saved succesfully");
+    }, function error(err) {
+      res.status(500).send(err);
+    });
+  }
+  function deleteGoo(req, res){
+    console.log(req);
+    db.Goo.deleteGoo(db.ObjectId(req.params.gooid)).then(function success(data) {
+      res.send('DELETE request to homepage');
     }, function error(err) {
       res.status(500).send(err);
     });

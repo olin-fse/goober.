@@ -36,7 +36,11 @@ function saveGoo(GooData) {
     if (err) console.log("Goo save error:", err);
   });
 }
-
+function deleteGoo(gooId) {
+  return GooModel.remove(
+    { _id: gooId}
+  );
+}
 /**
   Gets all Goos
   @param {Object[]} [filter] - Optional mongoose filter
@@ -59,5 +63,6 @@ Goo.model          = GooModel;
 Goo.saveGoo        = saveGoo;
 Goo.getGoos        = getGoos;
 Goo.getOneGoo      = getOneGoo;
+Goo.deleteGoo      = deleteGoo;
 
 module.exports     = Goo;

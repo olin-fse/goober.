@@ -1,13 +1,13 @@
-import React from 'react'
-
+import React from 'react';
+import Goos from './Goos';
+import {Row, Col} from 'react-materialize';
 
 const Home = () => (
-  <div>
-    <h1>Welcome to Goober.</h1>
-    <div>
-      {/* <Goos/> */}
-    </div>
-  </div>
+  <Row>
+    <Col offset='s1' s={4}>
+      <Goos/>
+    </Col>
+  </Row>
 )
 
-export default Home
+export default Home;

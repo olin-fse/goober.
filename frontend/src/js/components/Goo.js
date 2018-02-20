@@ -10,7 +10,7 @@ class Goo extends Component{
     this.deleteNotify = this.deleteNotify.bind(this);
   }
   deleteNotify(){
-    toast("Goo Succesfully Deleteed", {
+    toast("Goo Succesfully Deleted", {
       type: toast.TYPE.INFO,
       hideProgressBar: true,
       pauseOnHover: false,

@@ -3,13 +3,12 @@ import {Row, Col} from 'react-materialize';
 import Goo from './Goo';
 import axios from 'axios';
 
-class Goos extends Component{
+class GooList extends Component{
   constructor(){
     super();
     this.state = {
       goos : [],
     };
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
   componentDidMount(){
     axios.get('/goos')
@@ -34,4 +33,4 @@ class Goos extends Component{
     );
   }
 }
-export default Goos;
+export default GooList;

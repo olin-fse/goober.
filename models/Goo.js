@@ -10,7 +10,7 @@ const GooSchema = mongoose.Schema({
   endDate:     Date,
   tags:        [], // list of tags (events type)
   people:      [], // list of person id
-  maxPeople:   Number,  
+  maxPeople:   Number,
 });
 
 const GooModel = mongoose.model('Goo', GooSchema);
@@ -46,7 +46,10 @@ function deleteGoo(gooId) {
   @param {Object[]} [filter] - Optional mongoose filter
 */
 function getGoos(filter) {
-  return GooModel.find(filter).sort('-startDate').lean();
+  return GooModel.find(filter).sort('-startDate').lean()
+  .catch(function(err){
+    console.log(err);
+  });
 }
 
 /**
@@ -54,7 +57,9 @@ function getGoos(filter) {
   @param {Object[]} [filter] - Optional mongoose filter
 */
 function getOneGoo(filter) {
-  return GooModel.findOne(filter);
+  return GooModel.findOne(filter).catch(function(err){
+    console.log(err);
+  });
 }
 
 let Goo = {};

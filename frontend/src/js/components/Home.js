@@ -1,11 +1,11 @@
 import React from 'react';
-import Goos from './Goos';
+import GooList from './GooList';
 import {Row, Col} from 'react-materialize';
 
 const Home = () => (
   <Row className='left'>
     <Col s={12}>
-      <Goos/>
+      <GooList/>
     </Col>
   </Row>
 )

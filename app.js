@@ -23,4 +23,6 @@ app.get('*', function (req, res) {
   res.sendFile(path.join(DIST_DIR, 'index.html'));
 });
 
+
+app.db = db;
 module.exports = app;

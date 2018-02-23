@@ -1,37 +1,18 @@
 import React, { Component } from 'react';
 import {Row, Col, Card, Icon, Button, Chip} from 'react-materialize';
-import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 
 class Goo extends Component{
   constructor(props){
     super(props)
-    this.deleteGoo = this.deleteGoo.bind(this);
-    this.deleteNotify = this.deleteNotify.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
-  deleteNotify(){
-    toast("Goo Succesfully Deleted", {
-      type: toast.TYPE.INFO,
-      hideProgressBar: true,
-      pauseOnHover: false,
-    });
-  }
-  deleteGoo(){
-    if(confirm('Delete this Goo?')){
-      const deleteGooLink = '/goo/' + this.props.data._id;
-      console.log("Sending delete request to " + deleteGooLink);
-      axios
-        .delete(deleteGooLink)
-        .then(() => {
-          this.deleteNotify();
-        })
-        .catch(err => console.log(err));
-    }
+  handleDeleteClick(){
+    this.props.deleteGoo(this.props.data._id);
   }
   render(){
     return(
       <Col m={6} s={12}>
-        <ToastContainer autoClose={2000}/>
   		    <Card className='blue darken-2' textClassName='white-text' title={this.props.data.title} >
             <h5>
               {this.props.data.description + "@" + this.props.data.location}
@@ -44,7 +25,7 @@ class Goo extends Component{
             			<Icon small>person</Icon> {this.props.data.maxPeople}
               </Col>
               <Col className='right'>
-                <Button floating className='white' onClick={this.deleteGoo}><Icon className='black'>delete</Icon></Button>
+                <Button floating className='white' onClick={this.handleDeleteClick}><Icon className='black'>delete</Icon></Button>
               </Col>
             </Row>
   		    </Card>

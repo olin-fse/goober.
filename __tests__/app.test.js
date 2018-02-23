@@ -1,18 +1,21 @@
 const app = require('.././app');
+const db = require('.././db_wrapper')
 const request = require('supertest');
+
 
 let goo;
 let goo_id;
 
 beforeEach(function() {
     goo = {tags:[], people:[], title:'', location:''};
-    app.db.Goo.saveGoo(goo).then((data) => {
+    return db.Goo.saveGoo(goo).then((data) => {
         goo_id = data._id;
     });
 });
 
 afterEach(function() {
-    app.db.Goo.deleteGoo(goo_id);
+    return db.Goo.deleteAllGoo(goo_id).then(()=>{
+    });
 });
 
 describe('Test the root path', () => {
@@ -31,19 +34,19 @@ describe('Test the /goo/:gooid path', () => {
             done();
         });
     });
-    test('It should response the GET method with 400 with error message if the id format is wrong(12digit hex)', (done) => {
+    test('It should response the GET method with 500 with a text/html if the id syntax is wrong(12digit hex)', (done) => {
         const wrong_goo_id = 'wronggooid' // mongo id with the wrong syntax
         request(app).get('/goo/' + wrong_goo_id).then((res) => {
-            expect(res.statusCode).toBe(400); // 400 - bad request
-            // expect(res.text).toBe('')
+            expect(res.statusCode).toBe(500);
+            expect(res.header['content-type']).toBe('text/html; charset=utf-8')
             done();
         });
     });
-    test('It should response the GET method with 404 with a JSON if the goo with gooid does not exist', (done) => {
+    test('It should response the GET method with 404 with an error message if the goo with gooid does not exist', (done) => {
         const fake_goo_id = '5a88afe5a8ba7c1af90f0a24' // fake mongo id with the right syntax
         request(app).get('/goo/'+ fake_goo_id ).then((res) => {
             expect(res.statusCode).toBe(404); // content not found
-            expect(res.header['content-type']).toBe('application/json; charset=utf-8')
+            expect(res.text).toBe('goo not found')
             done();
         });
     });
@@ -54,11 +57,10 @@ describe('Test the /goo/:gooid path', () => {
             done();
         });
     });
-    test('It should response the DELETE method with 400 with error message if the id format is wrong(12digit hex)', (done) => {
+    test('It should response the DELETE method with 500 with error message if the id format is wrong(12digit hex)', (done) => {
         const wrong_goo_id = 'wronggooid' // mongo id with the wrong syntax
         request(app).delete('/goo/' + wrong_goo_id).then((res) => {
-            expect(res.statusCode).toBe(400);
-            // expect(res.text).toBe('')
+            expect(res.statusCode).toBe(500);
             done();
         });
     });
@@ -67,7 +69,7 @@ describe('Test the /goo/:gooid path', () => {
         const fake_goo_id = '5a88afe5a8ba7c1af90f0a24'
         request(app).delete('/goo/' + fake_goo_id).then((res) => {
             expect(res.statusCode).toBe(404);
-            expect(res.text).toBe('')
+            expect(res.text).toBe('goo not found')
             done();
         });
     });
@@ -86,7 +88,7 @@ describe('Test the /goos path', () => {
           .post('/goos')
           .send(testGoo).then((res) => {
             expect(res.statusCode).toBe(200);
-            expect(res.text).toBe("new Goo was saved succesfully")
+            expect(res.text).toBe("new Goo was saved succesfully");
             done();
         });
     });

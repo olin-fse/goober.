@@ -16,10 +16,14 @@ module.exports = function (db){
     .post(createGoo);
 
   function getGoo(req, res){
-    db.Goo.getOneGoo(db.ObjectId(req.params.gooid)).then(function (goo) {
-      res.status(200).send(goo);
+    db.Goo.getOneGoo(db.ObjectId(req.params.gooid)).then(function success(data) {
+        if (data){
+            res.send(data);
+        } else {
+            res.status(404).send("goo not found");
+        }
     }, function error(err) {
-      res.status(500).send(err);
+        res.status(500).send(err);
     });
   }
   function getAllGoos(req, res){
@@ -48,7 +52,11 @@ module.exports = function (db){
   }
   function deleteGoo(req, res){
     db.Goo.deleteGoo(db.ObjectId(req.params.gooid)).then(function success(data) {
-      res.status(200).send('DELETE request succesful');
+        if (data.n > 0){
+            res.status(200).send('DELETE request succesful');
+        } else {
+            res.status(404).send("goo not found");
+        }
     }, function error(err) {
       res.status(500).send(err);
     });

@@ -7,7 +7,7 @@ mongoose.Promise = global.Promise;
 if(process.env.NODE_ENV == 'test'){
   connectToDB(mongoTestURI);
 }
-else{
+else {
   connectToDB(mongoURI);
 }
 

@@ -33,13 +33,17 @@ function saveGoo(GooData) {
     maxPeople:   GooData.maxPeople,
   });
   return newGoo.save().catch(function (err) {
-    if (err) console.log("Goo save error:", err);
+    if (err) console.log(err);
   });
 }
 function deleteGoo(gooId) {
-  return GooModel.remove(
-    { _id: gooId}
-  );
+    return GooModel.remove(
+        { _id: gooId}
+    )
+}
+
+function deleteAllGoo() {
+    return GooModel.remove({})
 }
 /**
   Gets all Goos
@@ -57,9 +61,7 @@ function getGoos(filter) {
   @param {Object[]} [filter] - Optional mongoose filter
 */
 function getOneGoo(filter) {
-  return GooModel.findOne(filter).catch(function(err){
-    console.log(err);
-  });
+  return GooModel.findOne(filter);
 }
 
 let Goo = {};
@@ -69,5 +71,6 @@ Goo.saveGoo        = saveGoo;
 Goo.getGoos        = getGoos;
 Goo.getOneGoo      = getOneGoo;
 Goo.deleteGoo      = deleteGoo;
+Goo.deleteAllGoo   = deleteAllGoo; // for testing
 
 module.exports     = Goo;

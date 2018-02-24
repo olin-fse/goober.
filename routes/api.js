@@ -3,10 +3,6 @@ const express = require('express');
 var router = express.Router();
 
 module.exports = function (db){
-  router.route('/api*')
-    .get(function(req, res){
-      res.send('api');
-    })
   router.route('/goo/:gooid')
     .get(getGoo)
     .delete(deleteGoo)

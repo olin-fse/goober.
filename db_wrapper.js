@@ -14,18 +14,24 @@ else {
 const Goo = require('./models/Goo');
 var db_wrapper = {}; // wrapper for database module
 
-db_wrapper.connecToDB = connectToDB;
+db_wrapper.connectToDB = connectToDB;
 db_wrapper.Goo = Goo;
 db_wrapper.ObjectId = mongoose.Types.ObjectId;
 
 module.exports = db_wrapper;
 
 function connectToDB(url) {
-  mongoose.connect(url);
-  let db = mongoose.connection;
 
+  mongoose.connect(url);
+
+  let db = mongoose.connection;
   db.on('error', console.error.bind(console, 'mongoose connection error:'));
   db.once('open', function(){
     console.log("Connected to mongodb on", url);
   });
+  return db;
+
+}
+function disconnectDB(){
+    db.close()
 }

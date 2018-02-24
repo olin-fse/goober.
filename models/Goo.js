@@ -43,7 +43,12 @@ function deleteGoo(gooId) {
 }
 
 function deleteAllGoo() {
-    return GooModel.remove({})
+    if (process.env.NODE_ENV !== 'test') {
+        throw new Error(`[ENV -> ${process.env.NODE_ENV}] This method should only use when testing, try set process.env.NODE_ENV = "test"`);
+    }
+    else{
+        return GooModel.remove({})
+    }
 }
 /**
   Gets all Goos

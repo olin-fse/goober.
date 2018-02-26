@@ -7,6 +7,7 @@ let goo;
 let goo_id;
 
 beforeEach(function() {
+    // Add goo before each test
     goo = {tags:[], people:[], title:'', location:''};
     return db.Goo.saveGoo(goo).then((data) => {
         goo_id = data._id;
@@ -14,6 +15,7 @@ beforeEach(function() {
 });
 
 afterEach(function() {
+    // Delete all goo after each test
     return db.Goo.deleteAllGoo(goo_id).then(()=>{
     });
 });

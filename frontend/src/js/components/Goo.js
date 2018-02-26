@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {Row, Col, Card, Icon, Button, Chip} from 'react-materialize';
+import Moment from 'react-moment';
+import 'moment-timezone';
+
 import axios from 'axios';
 
 class Goo extends Component{
@@ -17,7 +20,13 @@ class Goo extends Component{
             <h5>
               {this.props.data.description + "@" + this.props.data.location}
               <br/>
-              {this.props.data.startDate + "~" + this.props.data.endDate}
+                  <Moment format="HH:mm dddd MM/DD">
+                    {this.props.data.startDate}
+                  </Moment>
+                  ~
+                  <Moment format="HH:mm dddd MM/DD">
+                    {this.props.data.endDate}
+                  </Moment>
             </h5>
             <hr/>
             <Row>

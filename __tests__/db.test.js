@@ -18,16 +18,15 @@ describe('Test connectToDB function of db_wrapper', () => {
             done();
         });
     });
-    // test('When given a wrong MongoURI, it should respond with error', (done) => {
-    //     function connectToWrongDB(){
-    //         const wrongURI = 'iamnotamongodab';
-    //         return db.connectToDB(wrongURI);
-    //     }
-    //     res = connectToWrongDB();
-    //     //todo connectTODB is not throwing errors that throwError can catch
-    //     expect(res.readyState).toBe(2);
-    //     done();
-    // });
+    test('When given a wrong MongoURI, it should respond with error', (done) => {
+        // lets use spy instead
+        const spy = jest.spyOn(db, 'connectToDB');
+        const isConnecting = db.connectToDB('wonrguri')
+        //todo connectTODB is not throwing errors that throwError can catch
+        expect(spy).toThrowError();
+        // expect(res.readyState).toBe(0);
+        done();
+    });
 });
 
 describe('Test Goo Model', () => {
@@ -45,5 +44,8 @@ describe('Test Goo Model', () => {
         expect(deleteAllGoo).toThrowError("InvalidEnvironmentError");
         process.env.NODE_ENV = 'test';
         done();
+    });
+    test('saveGoo should throw error when values have wrong data types', (done) => {
+
     });
 });

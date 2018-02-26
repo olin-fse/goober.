@@ -33,16 +33,32 @@ function saveGoo(GooData) {
     maxPeople:   GooData.maxPeople,
   });
   return newGoo.save().catch(function (err) {
-    if (err) console.log("Goo save error:", err);
+    if (err) console.log(err);
   });
 }
+function deleteGoo(gooId) {
+    return GooModel.remove(
+        { _id: gooId}
+    )
+}
 
+function deleteAllGoo() {
+    if (process.env.NODE_ENV !== 'test') {
+        throw new Error('InvalidEnvironmentError');
+    }
+    else{
+        return GooModel.remove({})
+    }
+}
 /**
   Gets all Goos
   @param {Object[]} [filter] - Optional mongoose filter
 */
 function getGoos(filter) {
-  return GooModel.find(filter).sort('-startDate').lean();
+  return GooModel.find(filter).sort('-startDate').lean()
+  .catch(function(err){
+    console.log(err);
+  });
 }
 
 /**
@@ -59,5 +75,7 @@ Goo.model          = GooModel;
 Goo.saveGoo        = saveGoo;
 Goo.getGoos        = getGoos;
 Goo.getOneGoo      = getOneGoo;
+Goo.deleteGoo      = deleteGoo;
+Goo.deleteAllGoo   = deleteAllGoo; // for testing
 
 module.exports     = Goo;

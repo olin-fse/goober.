@@ -3,10 +3,11 @@ Goober. is an online events organization service for small local communities. Go
 
 ## Setup & How to Run
 
-1. Backend (NodeJS)
-  - `npm run start`
+1. Backend (NodeJS with Express)
+  - install nodemon `sudo npm install -g nodemon`
+  - run `npm start`
 
-2. Frontend (React & Webpack)
+2. Frontend (React, React-Router, Webpack)
   - `npm install` to install node_modules listed in package.json
   - `cd frontend`
   - (dev) run `$ npm run watch`
@@ -15,3 +16,12 @@ Goober. is an online events organization service for small local communities. Go
 
 3. Database (MongoDB with Mongoose)
  - `sudo service mongod start`
+
+## Testing
+Jest is the test framework for both backend and frontend.
+1. Backend
+  - `npm run test`
+  - Environment Variable NODE_ENV is set to 'test' (NODE_ENV=test)
+2. Frontend
+  - `cd frontend`
+  - `npm run test`

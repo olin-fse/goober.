@@ -8,7 +8,7 @@ let goo_id;
 
 beforeEach(function() {
     // Add goo before each test
-    goo = {tags:[], people:[], title:'', location:''};
+    goo = {title:'test', description: 'test', tags:[], people:[], title:'', location:''};
     return db.Goo.saveGoo(goo).then((data) => {
         goo_id = data._id;
     });

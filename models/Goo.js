@@ -3,9 +3,9 @@ const request = require('request');
 
 // Define and compile Goo Schema
 const GooSchema = mongoose.Schema({
-  title:       String,
+  title:       {type: String},
   location:    String,
-  description: String,
+  description: {type: String},
   startDate:   Date,
   endDate:     Date,
   tags:        [], // list of tags (events type)
@@ -14,8 +14,6 @@ const GooSchema = mongoose.Schema({
 });
 
 const GooModel = mongoose.model('Goo', GooSchema);
-
-
 // Goo functions
 /**
   Create and save a new Goo in the db

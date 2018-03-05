@@ -1,5 +1,9 @@
 {
   "name": "goober.",
+  "jest": {
+      "verbose": true,
+      "roots":["./__tests__"]
+  },
   "version": "1.0.0",
   "description": "Goober. is an online events organization service for small local communities. Goober supports users like pick-up sports players, acquaintances, meetup group organizers to create, share, and join upcoming events.",
   "main": "server.js",

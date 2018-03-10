@@ -6,18 +6,17 @@ const expect = chai.expect;
 const port = process.env.PORT | 8080;
 const rootPath = 'http://localhost:' + port;
 
-describe('goober home page, ', function() {
-  // test Goo setup
-  const testTime = new Date();
-  const goo = {title: 'test',
-               description: 'test',
-               location:'test',
-               tags:[],
-               people:[],
-               startDate: testTime,
-               endDate: testTime,
-               maxPeople: 4 };
+const testTime = new Date();
+const goo = {title: 'test',
+             description: 'test',
+             location:'test',
+             tags:[],
+             people:[],
+             startDate: testTime,
+             endDate: testTime,
+             maxPeople: 4 };
 
+describe('goober home page, ', function() {
   beforeAll(function(){
       axios.delete(rootPath +'/goos'); // deletes all goo before testing
       axios.post(rootPath +'/goos', goo);// add a test goo, retrieve its id
@@ -143,10 +142,70 @@ describe('Navigation Bar', function(){
 
 describe('New Goo Page', function(){
     beforeAll(function(){
-        browser.url(rootPath);
+        axios.delete(rootPath +'/goos'); // deletes all goo before testing
+        browser.windowHandleMaximize();
     });
-    it('should have the link to Home visible', function(){
+    afterEach(function() {
+        axios.delete(rootPath +'/goos'); // deletes all goo after testing
+    });
+    beforeEach(function(){
+        browser.url(rootPath + '/newgoo');
+    });
+    it('should have Create New Goo title', function(){
+        expect('.formTitle').to.be.visible();
+        expect(browser.getText('.formTitle')).to.equal('Create New Goo');
+    });
+    it('should have all input fields with empty values', function(){
+        expect(browser.getValue('.title')).to.equal('');
+        expect(browser.getValue('.description')).to.equal('');
+        expect(browser.getValue('.location')).to.equal('');
+        expect(browser.getValue('.maxPeople')[1]).to.equal('4');
+        expect(browser.getValue('.startDate')).to.equal('');
+        expect(browser.getValue('.endDate')).to.equal('');
+    });
+    it('user should submit a new goo and see a new one on the home page', function(){
+        // fill out the form
+        browser.setValue('.title', 'test');
+        browser.setValue('.description', 'test');
+        browser.setValue('.location', 'test');
 
+        // select startDate
+        browser.click('label=startDate');
+        browser.waitForVisible('#input_4_root .picker__footer')
+        browser.click('#input_4_root .picker__today')
+        browser.click('#input_4_root .picker__close');
+        browser.waitForVisible('#input_4_root .picker__holder', 1000, true)
+
+        // select endDate
+        browser.click('label=endDate')
+        browser.waitForVisible('#input_5_root .picker__footer')
+        browser.click('#input_5_root .picker__today')
+        browser.click('#input_5_root .picker__close');
+
+        // submit and wiat until to be redirected
+        browser.click('.submitButton');
+        expect('.formToast').to.be.visible(1000);
+        browser.waitUntil(function(){
+            return browser.getUrl()===(rootPath+'/');
+        }, 5000);
+
+        // Did the goo get created with the right info?
+        expect('.Goo').to.have.count(1);
+        expect('.Goo .card-title').to.have.text('test');
+        expect('.Goo .location').to.have.text('@ test');
+        expect('.Goo .description').to.have.text('test');
+        expect('.Goo .startTime').to.have.text(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/); // hh:mm
+        expect('.Goo .endTime').to.have.text(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/); // hh:mm
+        var re1='((?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Tues|Thur|Thurs|Sun|Mon|Tue|Wed|Thu|Fri|Sat))';	// Day Of Week 1
+        var re2='(.)';	// Any Single Character 1
+        var re3='(.)';	// Any Single Character 2
+        var re4='((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?))';	// Month 1
+        var re5='(.)';	// Any Single Character 3
+        var re6='((?:(?:[0-2]?\\d{1})|(?:[3][01]{1})))(?![\\d])';	// Day 1
+        var re7='((?:[a-z][a-z]+))';	// Word 1
+        var dateregex = new RegExp(re1+re2+re3+re4+re5+re6+re7,["i"]);
+        expect('.Goo .date').to.have.text(dateregex); // dddd, MMMM Do
+        expect('.Goo .maxPeople').to.have.text('person 4');
     });
 
 });

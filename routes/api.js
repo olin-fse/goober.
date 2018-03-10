@@ -5,11 +5,13 @@ var router = express.Router();
 module.exports = function (db){
   router.route('/goo/:gooid')
     .get(getGoo)
-    .delete(deleteGoo)
+    //.put(updateGoo) todo
+    .delete(deleteGoo);
 
   router.route('/goos')
     .get(getAllGoos)
-    .post(createGoo);
+    .post(createGoo)
+    .delete(deleteAllGoo);
 
   function getGoo(req, res){
     db.Goo.getOneGoo(db.ObjectId(req.params.gooid)).then(function success(data) {
@@ -41,7 +43,7 @@ module.exports = function (db){
       maxPeople:   req.body.maxPeople,
     };
     db.Goo.saveGoo(goo).then(function(gooData) {
-      res.status(200).send("new Goo was saved succesfully");
+      res.status(200).send(gooData);
     }, function error(err) {
       res.status(500).send(err);
     });
@@ -53,6 +55,13 @@ module.exports = function (db){
         } else {
             res.status(404).send("goo not found");
         }
+    }, function error(err) {
+      res.status(500).send(err);
+    });
+  }
+  function deleteAllGoo(req, res){
+    db.Goo.deleteAllGoo().then(function success(data) {
+      res.status(200).send('DELETE request succesful');
     }, function error(err) {
       res.status(500).send(err);
     });

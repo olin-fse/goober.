@@ -15,7 +15,7 @@ const Goo = require('./models/Goo');
 var db_wrapper = {}; // wrapper for database module
 
 db_wrapper.connectToDB = connectToDB;
-db_wrapper.Goo = Goo;   
+db_wrapper.Goo = Goo;
 db_wrapper.ObjectId = mongoose.Types.ObjectId;
 
 module.exports = db_wrapper;

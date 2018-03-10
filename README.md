@@ -18,10 +18,13 @@ Goober. is an online events organization service for small local communities. Go
  - `sudo service mongod start`
 
 ## Testing
-Jest is the test framework for both backend and frontend.
-1. Backend
+Jest is the test framework for backend (unit tests, integration tests)
+WebdriverIO is used for frontend (end-to-end tests)
+
+1. Backend (Jest)
   - `npm run test`
   - Environment Variable NODE_ENV is set to 'test' (NODE_ENV=test)
-2. Frontend
+
+2. Frontend (WebdriverIO, Chai)
   - `cd frontend`
-  - `npm run test`
+  - `npm run e2e`

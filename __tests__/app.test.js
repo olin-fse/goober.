@@ -90,7 +90,6 @@ describe('Test the /goos path', () => {
           .post('/goos')
           .send(testGoo).then((res) => {
             expect(res.statusCode).toBe(200);
-            expect(res.text).toBe("new Goo was saved succesfully");
             done();
         });
     });

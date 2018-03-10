@@ -56,7 +56,7 @@ class GooList extends Component{
       <Row>
         <Col>
           <ToastContainer autoClose={2000}/>
-            <ul>
+            <ul className='GooList'>
               {goos}
             </ul>
         </Col>

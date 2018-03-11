@@ -21,6 +21,10 @@ describe('goober home page, ', function() {
       axios.delete(rootPath +'/goos'); // deletes all goo before testing
       axios.post(rootPath +'/goos', goo);// add a test goo, retrieve its id
       browser.url(rootPath);
+      browser.setViewportSize({
+          width: 1024,
+          height: 1024
+      });
   });
   afterAll(function() {
       axios.delete(rootPath +'/goos'); // deletes all goo after testing
@@ -89,11 +93,14 @@ describe('goober home page, ', function() {
 describe('Navigation Bar', function(){
     beforeEach(function(){
         browser.url(rootPath);
+        browser.setViewportSize({
+            width: 1024,
+            height: 1024
+        });
     });
     it('should have all the links visible for max size window', function(){
-        browser.windowHandleMaximize();
-        expect('.nav-wrapper .homeLink').to.be.visible();
-        expect('.nav-wrapper .newGooLink').to.be.visible();
+        expect('.nav-wrapper .homeLink').to.be.visible(1000);
+        expect('.nav-wrapper .newGooLink').to.be.visible(1000);
     });
     it('should have all the links visible for responsive window', function(){
         browser.setViewportSize({
@@ -105,7 +112,6 @@ describe('Navigation Bar', function(){
         expect('.button-collapse').to.be.visible();
     });
     it('clicking Home link should navigate to root route /', function(){
-        browser.windowHandleMaximize();
         browser.click('.nav-wrapper .homeLink');
         var browserUrl = browser.getUrl();
         expect(browserUrl).to.equal(rootPath + '/');
@@ -122,7 +128,6 @@ describe('Navigation Bar', function(){
         expect(browserUrl).to.equal(rootPath + '/');
     });
     it('clicking New Goo link should navigate to /newgoo route', function(){
-        browser.windowHandleMaximize();
         browser.click('.nav-wrapper .newGooLink');
         var browserUrl = browser.getUrl();
         expect(browserUrl).to.equal(rootPath+'/newgoo');
@@ -143,7 +148,10 @@ describe('Navigation Bar', function(){
 describe('New Goo Page', function(){
     beforeAll(function(){
         axios.delete(rootPath +'/goos'); // deletes all goo before testing
-        browser.windowHandleMaximize();
+        browser.setViewportSize({
+            width: 1024,
+            height: 1024
+        });
     });
     afterEach(function() {
         axios.delete(rootPath +'/goos'); // deletes all goo after testing
@@ -181,6 +189,7 @@ describe('New Goo Page', function(){
         browser.waitForVisible('#input_5_root .picker__footer')
         browser.click('#input_5_root .picker__today')
         browser.click('#input_5_root .picker__close');
+        browser.waitForVisible('#input_5_root .picker__holder', 1000, true)
 
         // submit and wiat until to be redirected
         browser.click('.submitButton');

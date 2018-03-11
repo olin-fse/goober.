@@ -1,9 +1,43 @@
-language: node_js
-node_js:
-  - "iojs"
-  - "lts/*"
-services:
-  - mongodb
+matrix:
+  include:
+    # backend jest tests
+    - language: node_js
+      node_js:
+          - "lts/*"
+      services:
+          - mongodb
+      env:
+        - NODE_ENV=test
+        - TEST_ENV=jest
 
-env:
-  - NODE_ENV=test
+    # e2e tests
+    - language: node_js
+      node_js:
+          - "lts/*"
+      services:
+          - mongodb
+      addons:
+        - chrome: stable
+      before_install:
+        - npm run start
+        - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+      env:
+        - NODE_ENV=test
+        - TEST_ENV=e2e
+
+install:
+  - if ["$TEST_ENV" = "jest" ]; then
+      npm install;
+    fi
+  - if ["$TEST_ENV" = 'e2e']; then
+      cd frontend;
+      npm install;
+    fi
+
+script:
+  - if ["$TEST_ENV" = "jest" ]; then
+      npm run test;
+    fi
+  - if ["$TEST_ENV" = 'e2e']; then
+      npm run e2e;
+    fi

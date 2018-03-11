@@ -2,7 +2,9 @@
     "name": "goober.",
     "jest": {
         "verbose": true,
-        "roots": ["./__tests__"]
+        "roots": [
+            "./__tests__"
+        ]
     },
     "version": "1.0.0",
     "description": "Goober. is an online events organization service for small local communities. Goober supports users like pick-up sports players, acquaintances, meetup group organizers to create, share, and join upcoming events.",
@@ -26,6 +28,8 @@
         "body-parser": "^1.18.2",
         "express": "^4.16.2",
         "mongoose": "^5.0.3",
+        "passport": "^0.4.0",
+        "passport-facebook": "^2.1.1",
         "path": "^0.12.7"
     },
     "devDependencies": {

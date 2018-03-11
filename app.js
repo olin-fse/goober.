@@ -4,6 +4,31 @@ const path = require('path');
 const db = require('./db_wrapper');
 const bodyParser = require('body-parser');
 
+const passport = require('passport');
+const FacebookStrategy = require('passport-facebook').Strategy;
+const port = process.env.PORT || 8080;
+const FacebookCallbackURL = 'http://localhost:' + port + '/auth/facebook/callback'
+
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+  callbackURL: FacebookCallbackURL
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+      return done(null, profile);
+    });
+  }
+));
+// serialize and deserilize
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+
 const DIST_DIR = path.join(__dirname, 'frontend/public');
 
 // parse application/x-www-form-urlencoded

@@ -23,12 +23,12 @@ matrix:
           - "lts/*"
       services:
           - mongodb
+      dist: trusty
       sudo: required
       addons:
         - chrome: stable
       env:
         - NODE_ENV=test
-
       before_install:
         - npm install
         - npm run server

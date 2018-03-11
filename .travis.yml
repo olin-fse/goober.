@@ -1,7 +1,3 @@
-cache:
-  directories:
-  - node_modules
-
 matrix:
   include:
     # backend jest tests
@@ -13,9 +9,9 @@ matrix:
       env:
         - NODE_ENV=test
       install:
-        - npm install;
+        - npm install
       script:
-        - npm test;
+        - npm test
 
     # e2e tests
     - language: node_js
@@ -33,7 +29,7 @@ matrix:
         - npm run start
         - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
       install:
-        - cd frontend;
-          npm install;
+        - cd frontend
+          npm install
       script:
-        - npm run e2e;
+        - npm run e2e

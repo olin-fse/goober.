@@ -19,6 +19,7 @@ matrix:
       addons:
         - chrome: stable
       before_install:
+        - npm install
         - npm run start
         - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
       env:
@@ -29,15 +30,15 @@ install:
   - if ["$TEST_ENV" = "jest" ]; then
       npm install;
     fi
-  - if ["$TEST_ENV" = 'e2e']; then
+  - if ["$TEST_ENV" = "e2e"]; then
       cd frontend;
       npm install;
     fi
 
 script:
   - if ["$TEST_ENV" = "jest" ]; then
-      npm run test;
+      npm test;
     fi
-  - if ["$TEST_ENV" = 'e2e']; then
+  - if ["$TEST_ENV" = "e2e"]; then
       npm run e2e;
     fi

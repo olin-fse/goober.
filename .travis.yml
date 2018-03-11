@@ -19,6 +19,7 @@ matrix:
           - "lts/*"
       services:
           - mongodb
+      sudo: required
       addons:
         - chrome: stable
       env:

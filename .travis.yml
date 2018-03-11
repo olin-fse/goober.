@@ -21,7 +21,7 @@ matrix:
           - mongodb
       sudo: required
       addons:
-        - chrome: stable
+        - chrome: beta
       env:
         - NODE_ENV=test
 

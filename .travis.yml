@@ -9,7 +9,6 @@ matrix:
       env:
         - NODE_ENV=test
       install:
-        - npm cache clean
         - npm install
       script:
         - npm test
@@ -26,7 +25,6 @@ matrix:
         - NODE_ENV=test
 
       before_install:
-        - npm cache clean
         - npm install
         - npm run start
         - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &

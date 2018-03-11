@@ -15,26 +15,33 @@ class Goo extends Component{
   }
   render(){
     return(
-      <Col m={6} s={12}>
-  		    <Card className='blue darken-2' textClassName='white-text' title={this.props.data.title} >
+      <Col className='Goo'>
+  		    <Card className='blue darken-3' textClassName='white-text' title={this.props.data.title} >
             <h5>
-              {this.props.data.description + "@" + this.props.data.location}
-              <br/>
-                  <Moment format="HH:mm dddd MM/DD">
+              <div className="location">@ {this.props.data.location}</div>
+              <div className="description">{this.props.data.description}</div>
+              <div className="time">
+                  <Moment className="startTime" format="hh:mm">
                     {this.props.data.startDate}
                   </Moment>
-                  ~
-                  <Moment format="HH:mm dddd MM/DD">
+                   ~
+                  <Moment className="endTime" format="hh:mm">
                     {this.props.data.endDate}
                   </Moment>
+              </div>
+              <div>
+                  <Moment className="date" format="dddd, MMMM Do">
+                    {this.props.data.endDate}
+                  </Moment>
+              </div>
             </h5>
             <hr/>
             <Row>
-              <Col className='left '>
+              <Col className='left maxPeople'>
             			<Icon small>person</Icon> {this.props.data.maxPeople}
               </Col>
               <Col className='right'>
-                <Button floating className='white' onClick={this.handleDeleteClick}><Icon className='black'>delete</Icon></Button>
+                <Button floating className='white deleteButton' onClick={this.handleDeleteClick}><Icon className='black'>delete</Icon></Button>
               </Col>
             </Row>
   		    </Card>

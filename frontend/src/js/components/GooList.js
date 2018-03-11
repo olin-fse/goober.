@@ -55,8 +55,8 @@ class GooList extends Component{
     return(
       <Row>
         <Col>
-          <ToastContainer autoClose={2000}/>
-            <ul>
+          <ToastContainer className='deleteToast' autoClose={2000}/>
+            <ul className='GooList'>
               {goos}
             </ul>
         </Col>

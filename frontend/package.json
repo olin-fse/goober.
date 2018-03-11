@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ajv": "^6.2.1",
     "axios": "^0.17.1",
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
@@ -21,7 +22,7 @@
     "css-loader": "0.28.9",
     "less": "2.7.3",
     "less-loader": "4.0.5",
-    "moment": "^2.20.1",
+    "moment": "^2.21.0",
     "moment-timezone": "^0.5.14",
     "path": "0.12.7",
     "react": "16.2.0",
@@ -30,7 +31,7 @@
     "react-materialize": "^1.1.2",
     "react-moment": "^0.7.0",
     "react-router-dom": "^4.2.2",
-    "react-toastify": "^3.3.4",
+    "react-toastify": "^3.4.0",
     "style-loader": "0.20.1",
     "webpack": "3.10.0"
   },

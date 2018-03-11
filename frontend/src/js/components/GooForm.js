@@ -11,8 +11,8 @@ class GooForm extends Component {
       title : '',
       location : '',
       description : '',
-      startDate : new Date,
-      endDate : new Date,
+      startDate : '',
+      endDate : '',
       tags : [],
       people : [],
       maxPeople : 4,
@@ -52,25 +52,25 @@ class GooForm extends Component {
   render() {
     return (
       <Row>
-        <Col s='8'><h5>Create New Goo</h5></Col>
+        <Col s='8'><h5 className="formTitle">Create New Goo</h5></Col>
         <Col>
           <form>
-            <Input s={8} label='title' name='title' type="text" value={this.state.title} onChange={this.handleChange} />
-            <Input s={8} label='location' name='location' type="text" value={this.state.location} onChange={this.handleChange} />
-            <Input s={12} label='description' name='description' value={this.state.description} onChange={this.handleChange}/>
-            <Input s={3} label='Max People' type='select' defaultValue='2' name='maxPeople' value={this.state.maxPeople} onChange={this.handleChange}>
+            <Input s={8} label='title' className='title' name='title' type="text" value={this.state.title} onChange={this.handleChange} />
+            <Input s={8} label='location' className='location' name='location' type="text" value={this.state.location} onChange={this.handleChange} />
+            <Input s={12} label='description' className='description' name='description' value={this.state.description} onChange={this.handleChange}/>
+            <Input s={3} label='Max People' type='select' className='maxPeople' name='maxPeople' value={this.state.maxPeople} onChange={this.handleChange}>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
             </Input>
-            <Input label='startDate' name='startDate' type='date' value={this.state.startDate} onChange={this.handleChange} />
-            <Input label='endDate' name='endDate' type='date' value={this.state.endDate} onChange={this.handleChange} />
+            <Input label='startDate' className='startDate' name='startDate' type='date' value={this.state.startDate} onChange={this.handleChange} />
+            <Input label='endDate' className='endDate' name='endDate' type='date' value={this.state.endDate} onChange={this.handleChange} />
             <Col s={12}>
-              <Button className="blue darken-4" type="submit" value="Submit" onClick={this.handleSubmit}>SUBMIT</Button>
+              <Button className="blue darken-4 submitButton" type="submit" value="Submit" onClick={this.handleSubmit}>SUBMIT</Button>
             </Col>
           </form>
-          <ToastContainer autoClose={1000}/>
+          <ToastContainer className='formToast' autoClose={1000}/>
           {this.state.fireRedirect && (
             <div>
               <Redirect to={'/'}/>

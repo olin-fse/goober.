@@ -10,7 +10,7 @@ matrix:
         - NODE_ENV=test
       install:
         - npm cache clean
-          npm install
+        - npm install
       script:
         - npm test
 
@@ -32,6 +32,6 @@ matrix:
         - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
       install:
         - cd frontend
-          npm install
+        - npm install
       script:
         - npm run e2e

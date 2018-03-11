@@ -84,7 +84,7 @@ describe('goober home page, ', function() {
       expect('.Goo .deleteButton').to.have.count(1);
       browser.click('.Goo .deleteButton');
       browser.alertAccept();
-      expect('.deleteToast').to.be.visible(2000);
+      browser.waitForVisible('.deleteToast')
       expect('.Goo .deleteButton').to.have.count(0);
       axios.post(rootPath +'/goos', goo); // add the test goo back
   });

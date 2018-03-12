@@ -2,3 +2,5 @@
 node_modules
 *.log
 errorShots/
+.env
+.out

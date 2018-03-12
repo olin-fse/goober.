@@ -6,6 +6,8 @@ const Header = () => (
     <Navbar className="blue" right>
         <NavItem><Link to='/' className="homeLink">Home</Link></NavItem>
         <NavItem><Link to='/newgoo' className="newGooLink">New Goo</Link></NavItem>
+        <NavItem><a href='/login/facebook' className='loginLink'>Login</a></NavItem>
+        <NavItem><a href='/logout' className='loginLink'>Logout</a></NavItem>
     </Navbar>
   </header>
 )

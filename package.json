@@ -2,7 +2,9 @@
     "name": "goober.",
     "jest": {
         "verbose": true,
-        "roots": ["./__tests__"]
+        "roots": [
+            "./__tests__"
+        ]
     },
     "version": "1.0.0",
     "description": "Goober. is an online events organization service for small local communities. Goober supports users like pick-up sports players, acquaintances, meetup group organizers to create, share, and join upcoming events.",
@@ -10,7 +12,8 @@
     "scripts": {
         "test": "NODE_ENV=test jest",
         "start": "nodemon server.js",
-        "server": "nohup node server.js &"
+        "server": "nohup node server.js &",
+        "build": "cd frontend; npm run build"
     },
     "repository": {
         "type": "git",
@@ -24,8 +27,12 @@
     "homepage": "https://github.com/olin-fse/goober.#readme",
     "dependencies": {
         "body-parser": "^1.18.2",
+        "cookie-parser": "^1.4.3",
         "express": "^4.16.2",
+        "express-session": "^1.15.6",
         "mongoose": "^5.0.3",
+        "passport": "^0.4.0",
+        "passport-facebook": "^2.1.1",
         "path": "^0.12.7"
     },
     "devDependencies": {

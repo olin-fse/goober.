@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const request = require('request');
+const mongoose = require('mongoose');   
 
 // Define and compile Goo Schema
 const GooSchema = mongoose.Schema({

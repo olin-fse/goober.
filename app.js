@@ -1,52 +1,55 @@
 const express = require('express');
 const app = express();
+
+// npm dependencies
 const path = require('path');
-const db = require('./db_wrapper');
 const bodyParser = require('body-parser');
-
 const passport = require('passport');
-const FacebookStrategy = require('passport-facebook').Strategy;
-const port = process.env.PORT || 8080;
-const FacebookCallbackURL = 'http://localhost:' + port + '/auth/facebook/callback'
+const cookieParser = require('cookie-parser');
+const expressSession = require('express-session');
 
-passport.use(new FacebookStrategy({
-  clientID: process.env.FACEBOOK_APP_ID,
-  clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: FacebookCallbackURL
-  },
-  function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function () {
-      return done(null, profile);
-    });
-  }
-));
+// Database
+const db = require('./db_wrapper');
 
-// serialize and deserilize
-passport.serializeUser(function(user, done) {
-    console.log(user);
-    done(null, user._id);
-});
-passport.deserializeUser(function(id, done) {
-    db.User.findById(id, function(err, user){
-        done(err, obj);
-    })
-});
-
-
-const DIST_DIR = path.join(__dirname, 'frontend/public');
-
-// parse application/x-www-form-urlencoded
+// Parsing
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-// parse application/json
 app.use(bodyParser.json())
+app.use(cookieParser());
 
-const api = require('./routes/api')(db);
+// Session
+app.use(expressSession({secret: 'mySecretKey',
+                        saveUninitialized:false,
+                        resave:false}));
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+const initPassport = require('./passport/init');
+initPassport(passport);
+
+
+// Routes
+const isAuthenticated = function (req, res, next) {
+        // if user is authenticated in the session, call the next() to call the next request handler
+        // Passport adds this method to request object. A middleware is allowed to add properties to
+        // request and response objects
+        if (req.isAuthenticated())
+            return next();
+        // if the user is not authenticated then redirect him to the login page
+        console.log("not logged in");
+        res.redirect('/');
+}
+
+const auth = require('./routes/auth')(db, passport);
+app.use('/', auth);
+const api = require('./routes/api')(db, isAuthenticated);
 app.use('/', api);
 
+// Static dir
+const DIST_DIR = path.join(__dirname, 'frontend/public');
 app.use(express.static(DIST_DIR));
-
 // app.get('/') will mess up react-router settings
 app.get('*', function (req, res) {
   res.sendFile(path.join(DIST_DIR, 'index.html'));

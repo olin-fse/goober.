@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 var router = express.Router();
 
-module.exports = function (db){
+module.exports = function (db, isAuthenticated){
   router.route('/goo/:gooid')
     .get(getGoo)
     //.put(updateGoo) todo
@@ -10,7 +10,7 @@ module.exports = function (db){
 
   router.route('/goos')
     .get(getAllGoos)
-    .post(createGoo)
+    .post(isAuthenticated, createGoo)
     .delete(deleteAllGoo);
 
   function getGoo(req, res){

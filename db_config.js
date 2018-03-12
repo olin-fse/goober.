@@ -14,6 +14,14 @@ var db_config = {
             port: '27017',
             db:   'goober'
         },
+    },
+    prod: {
+        uri: 'mongodb://admin:password@ds213229.mlab.com:13229/goober',
+        database:{
+            host: 'ds213229.mlab.com',
+            port: '13229',
+            db: 'goober'
+        },
     }
 };
 

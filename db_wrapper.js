@@ -1,15 +1,12 @@
+const env = process.env.NODE_ENV || 'dev';
+
 const mongoose = require('mongoose');
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/goober';
-const mongoTestURI = 'mongodb://localhost/test';
+const config = require('./db_config')[env];
+
 mongoose.Promise = global.Promise;
 
-// tests will use NODE_ENV=test
-if(process.env.NODE_ENV == 'test'){
-  connectToDB(mongoTestURI);
-}
-else {
-  connectToDB(mongoURI);
-}
+connectToDB(config.uri);
+
 
 const Goo = require('./models/Goo');
 const User = require('./models/User');

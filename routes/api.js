@@ -10,7 +10,7 @@ module.exports = function (db, isAuthenticated){
 
   router.route('/goos')
     .get(getAllGoos)
-    .post(isAuthenticated, createGoo)
+    .post(createGoo)
     .delete(deleteAllGoo);
 
   function getGoo(req, res){

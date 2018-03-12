@@ -1,0 +1,6 @@
+# sync node_modules by npm install
+node_modules
+*.log
+errorShots/
+.env
+.out

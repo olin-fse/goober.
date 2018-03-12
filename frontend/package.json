@@ -1,0 +1,48 @@
+{
+  "name": "webpack-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "watch": "webpack --config dev.js --watch",
+    "build": "webpack -p --config prod.js",
+    "e2e": "./node_modules/.bin/wdio wdio.conf.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^6.2.1",
+    "axios": "^0.17.1",
+    "babel-core": "6.26.0",
+    "babel-loader": "7.1.2",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-react": "6.24.1",
+    "compression-webpack-plugin": "1.1.6",
+    "css-loader": "0.28.9",
+    "less": "2.7.3",
+    "less-loader": "4.0.5",
+    "moment": "^2.21.0",
+    "moment-timezone": "^0.5.14",
+    "path": "0.12.7",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "react-loadable": "^5.3.1",
+    "react-materialize": "^1.1.2",
+    "react-moment": "^0.7.0",
+    "react-router-dom": "^4.2.2",
+    "react-toastify": "^3.4.0",
+    "style-loader": "0.20.1",
+    "webpack": "3.10.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-webdriverio": "^0.4.3",
+    "chromedriver": "^2.35.0",
+    "jest": "^22.4.2",
+    "wdio-chromedriver-service": "^0.1.2",
+    "wdio-jasmine-framework": "^0.3.2",
+    "wdio-selenium-standalone-service": "0.0.9",
+    "webdriverio": "^4.10.2"
+  }
+}

@@ -4,7 +4,7 @@ const User = require('../models/User');
 const env = process.env.NODE_ENV;
 var FacebookCallbackURL = 'http://localhost:8080/login/facebook/callback';
 if(env === 'prod'){
-    FacebookCallbackURL = 'https://goober.olin.build:8080/login/facebook/callback';
+    FacebookCallbackURL = 'https://goober.olin.build/login/facebook/callback';
 }
 
 module.exports = function(passport) {

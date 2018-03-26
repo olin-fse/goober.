@@ -1,6 +1,11 @@
 const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../models/User');
-const FacebookCallbackURL = 'http://localhost:8080/login/facebook/callback'
+
+const env = process.env.NODE_ENV;
+var FacebookCallbackURL = 'http://localhost:8080/login/facebook/callback';
+if(env === 'prod'){
+    FacebookCallbackURL = 'https://goober.olin.build:8080/login/facebook/callback';
+}
 
 module.exports = function(passport) {
 

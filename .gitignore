@@ -4,3 +4,4 @@ node_modules
 errorShots/
 .env
 .out
+.vim

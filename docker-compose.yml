@@ -12,9 +12,9 @@ services:
         stdin_open: true
         depends_on:
             - 'mongo'
-        build:
-            context: .
-            dockerfile: Dockerfile
+        build: .
+        cache_from:
+            - olinfse/goober:latest
         command: node server.js
         ports:
             - '8080:8080'

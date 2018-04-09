@@ -4,9 +4,7 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 ADD . /app
 # install node_modules for backend and frontend
-RUN npm install
-RUN npm run build
-RUN cd node_modules; ls
+RUN npm install;npm run build
 # Make port 80 available to the world outside this container
 EXPOSE 8080
 # Run app.py when the container launches

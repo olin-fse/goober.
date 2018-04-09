@@ -9,7 +9,6 @@ ADD . /app
 # Install curl and nginx
 RUN apt-get update && apt-get install -y \
     curl \
-    nginx
 # install node, npm
 RUN curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 RUN bash nodesource_setup.sh

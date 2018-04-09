@@ -18,7 +18,7 @@ matrix:
         - sudo mv docker-compose /usr/local/bin
     before_script:
         - env > .env.list
-    install:
+    install: true
     script:
         - sudo docker-compose up
         - sudo docker-compose run goober /bin/bash -c "npm run test"

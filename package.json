@@ -13,7 +13,7 @@
         "test": "NODE_ENV=test jest",
         "start": "nodemon server.js",
         "server": "nohup node server.js &",
-        "build": "cd frontend; npm install; npm run build"
+        "build": "cd frontend; npm install; npm run build; cd .."
     },
     "repository": {
         "type": "git",

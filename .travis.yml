@@ -1,24 +1,27 @@
 env:
   global:
     - REGISTRY_USER=slyu
+    - MONGODB_URI=mongodb://mongo:27017
+    - DOCKER_COMPOSE_VERSION=1.20.1
 matrix:
   include:
   - sudo: required
+    language: node_js
     services:
         - docker
     env:
         - NODE_ENV=test
+    before_install:
+        - sudo rm /usr/local/bin/docker-compose
+        - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+        - chmod +x docker-compose
+        - sudo mv docker-compose /usr/local/bin
     before_script:
-        - sudo docker pull olinfse/goober || true
-        - env > .env
-        - echo .env
+        - env > .env.list
+    install:
     script:
-        - sudo docker build --pull --cache-from olinfse/goober --tag olinfse/goober .
-        - mkdir ~/data
-        - sudo docker run -d -p 27017:27017 -v ~/data:/data/db --name mongodb dockerfile/mongodb
-        - sudo docker ps -a
-        - sudo docker run --env-file .env --link mongodb -d -p 8080:8080 olinfse/goober
-        - sudo docker run olinfse/goober /bin/bash -c "npm run test"
+        - sudo docker-compose up
+        - sudo docker-compose run goober /bin/bash -c "npm run test"
     after_script:
         - docker images
     before_deploy:

@@ -1,24 +1,22 @@
 env:
   global:
     - REGISTRY_USER=slyu
-    - secret: fUHnoTKZRI42WitSihW4sqg1i/yjsjXIoo9StN7BC8HG4NP4Tbbcc0JY1Q2ghNFGWQVfkvNGyE81PKfD/n1c6KjZhpFlVblkXe1OWse1NXhhVVjMC15zT2CeMaoPGsnEguI0NIqEuvuc8aRdDM7OUKf9UqXzKHIlMRE8RSWyBY0LELEMF2vJMwajReZ+E2b6os/3/e5qYB8q/BwlWWyhf12vlo/KxTy8R/g5Z/QFko6ubmZjtMMXWKgUnbwdIcap5UcLONgaKkwAsGKJMSg68T2lAIkJjW7nCq2MIASmNkZLY2cQNM3JNkzzue9heCzDbCoowZfC4Okw4LubXvNmmKokmdk7ZhgzfEQPadS0pVcAG99T5TDa4s4OsYUE3XOcPHowxdaS7WKFQ9CljX+B0rW3+9T2i54yzSFk3ZNbTk2iCjDRiBZyDqp+6uxdD6JGwLCBYX7uMwVdQCiXPogO4/Sc5kKLSSRoVDMl01qsnqmBHbVL3dfkRgYgqMv9ysJv5h5/b2Mv+S0Srb5SkE6Hm5SNSl9u5KeSVPH7cZCRqakpSAss0YY0O7fPWQJHSRavcyDAY2hTZhzb26hpTTJmbCtCjq+jOZaflIocgCdh+BNs8RRVpQE/OeYZt2WD6F4TX/aBvjDTedO3ZAU2nlWE0l3K1L7RbcuAS9CUe8tEEks=
 matrix:
   include:
-  - language: node_js
-    node_js:
-        - lts/*
     sudo: required
     services:
-        - mongodb
         - docker
     env:
         - NODE_ENV=test
     before_script:
-        - docker pull olinfse/goober || true
+        - sudo docker pull olinfse/goober || true
+        - env > .env
     script:
-        - docker build --pull --cache-from olinfse/goober --tag olinfse/goober .
-        - docker run olinfse/goober
-        - npm test
+        - sudo docker build --pull --cache-from olinfse/goober --tag olinfse/goober .
+        - mkdir ~/data
+        - sudo docker run -d -p 27017:27017 -v ~/data:/data/db mongo
+        - sudo docker run --env-file .env --link mongo -d -p 8080:8080 olinfse/goober
+        - sudo docker run olinfse/goober /bin/bash -c "npm run test"
     after_script:
         - docker images
     before_deploy:
@@ -27,7 +25,7 @@ matrix:
         provider: script
         script: docker push olinfse/goober
         on:
-            branch: master
+            branch: dev
 
   - language: node_js
     node_js:

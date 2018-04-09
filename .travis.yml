@@ -1,5 +1,9 @@
+env:
+  global:
+    - REGISTRY_USER=slyu
 matrix:
   include:
+    language: node_js
     sudo: required
     services:
         - docker

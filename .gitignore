@@ -3,4 +3,6 @@ node_modules
 *.log
 errorShots/
 .env
+.env.list
 .out
+*.vim

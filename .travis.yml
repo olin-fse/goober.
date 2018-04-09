@@ -3,14 +3,11 @@ env:
     - REGISTRY_USER=slyu
 matrix:
   include:
-    language: node_js
-    sudo: required
+  - sudo: required
     services:
         - docker
     env:
         - NODE_ENV=test
-        - global:
-            - REGISTRY_USER=slyu
     before_script:
         - sudo docker pull olinfse/goober || true
         - env > .env

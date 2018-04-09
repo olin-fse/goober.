@@ -1,6 +1,3 @@
-env:
-  global:
-    - REGISTRY_USER=slyu
 matrix:
   include:
     sudo: required
@@ -8,6 +5,8 @@ matrix:
         - docker
     env:
         - NODE_ENV=test
+        - global:
+            - REGISTRY_USER=slyu
     before_script:
         - sudo docker pull olinfse/goober || true
         - env > .env

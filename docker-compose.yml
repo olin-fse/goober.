@@ -13,8 +13,6 @@ services:
         depends_on:
             - 'mongo'
         build: .
-        cache_from:
-            - olinfse/goober:latest
         command: node server.js
         ports:
             - '8080:8080'

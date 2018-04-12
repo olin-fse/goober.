@@ -2,7 +2,7 @@ const db = require('.././db_wrapper')
 const request = require('supertest')
 const mongoose = require('mongoose');
 
-const mongoTestURI = 'mongodb://localhost/test';
+const mongoTestURI = db.URI;
 
 describe('Test connectToDB function of db_wrapper', () => {
     beforeEach(() => {

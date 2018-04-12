@@ -20,7 +20,6 @@ matrix:
         - env > .env.list
     install: true
     script:
-        - sudo docker-compose --pull
         - sudo docker-compose run goober /bin/bash -c "npm run test"
     after_script:
         - docker images

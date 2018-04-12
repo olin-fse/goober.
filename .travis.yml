@@ -31,8 +31,8 @@ matrix:
         - env > .env.list
     install: true
     script:
-        #- sudo docker-compose run goober /bin/bash -c "npm run test"
-        - sudo docker-compose up
+        - sudo nohup docker-compose up
+        - sudo docker-compose run goober /bin/bash -c "npm run test"
         - npm run e2e
     after_script:
         - docker images

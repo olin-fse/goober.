@@ -7,11 +7,20 @@ services:
             - '27017:27017'
         volumes:
             - 'mongo:/data/db'
+        networks:
+            - gooberplatform
+    chromedriver:
+        image: robcherry/docker-chromedriver:latest
+        environment:
+            CHROMEDRIVER_WHITELISTED_IPS: ""
+        networks:
+            - gooberplatform
     goober:
         tty: true
         stdin_open: true
         depends_on:
             - 'mongo'
+            - 'chromedriver'
         build: .
         command: node server.js
         ports:
@@ -20,5 +29,10 @@ services:
             - .env.list
         environment:
             - MONGODB_URI=mongodb://mongo:27017/
+        networks:
+            - gooberplatform
 volumes:
     mongo:
+networks:
+    gooberplatform:
+        driver: bridge

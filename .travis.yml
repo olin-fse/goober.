@@ -33,7 +33,7 @@ matrix:
     script:
         - sudo docker-compose up --detach
         - sudo docker-compose run goober /bin/bash -c "npm run test"
-        - npm run e2e
+        #- sudo docker-compose run goober /bin/bash -c "cd frontend;npm run e2e"
     after_script:
         - docker images
     before_deploy:

@@ -31,9 +31,9 @@ matrix:
         - env > .env.list
     install: true
     script:
-        #- sudo nohup docker-compose up
+        - sudo nohup docker-compose -d up
         - sudo docker-compose run goober /bin/bash -c "npm run test"
-        #- npm run e2e
+        - npm run e2e
     after_script:
         - docker images
     before_deploy:
@@ -42,6 +42,6 @@ matrix:
         provider: script
         script: docker push olinfse/goober
         on:
-            branch: dev
+            branch: seungin/docker_setup
 
 

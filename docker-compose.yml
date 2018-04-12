@@ -16,8 +16,8 @@ services:
         command: node server.js
         ports:
             - '8080:8080'
-        volumes:
-            - '.:/app'
+        #volumes:
+            #- '.:/app'
         env_file:
             - .env.list
         environment:

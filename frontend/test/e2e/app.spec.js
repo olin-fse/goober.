@@ -4,7 +4,7 @@ const axios = require('axios');
 chai.use(chaiWebdriver(browser));
 const expect = chai.expect;
 const port = process.env.PORT | 8080;
-const rootPath = 'http://localhost:' + port;
+const rootPath = (process.env.DOCKER_GOOBER_URL || 'http://localhost:') + port;
 
 const testTime = new Date();
 const goo = {title: 'test',

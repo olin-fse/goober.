@@ -1,5 +1,4 @@
-version: '3'
-
+version: '3.6'
 services:
     mongo:
         image: 'mongo:3.4.1'
@@ -7,23 +6,34 @@ services:
             - '27017:27017'
         volumes:
             - 'mongo:/data/db'
-    selenium:
-        image: 'selenium/standalone-chrome'
-        expose:
-            - '4444'
+    chrome:
+        image: 'selenium/node-chrome:3.11.0-californium'
+        volumes:
+            - /dev/shm:/dev/shm
+        depends_on:
+            - hub
+        environment:
+            HUB_HOST: hub
+    hub:
+        image: 'selenium/hub:3.11.0-californium'
+        ports:
+            - "4444:4444"
     goober:
         tty: true
         stdin_open: true
         depends_on:
             - 'mongo'
-        build: .
+        build:
+            context: .
+            cache_from:
+                - olinfse/goober:latest
         command: node server.js
         ports:
             - '8080:8080'
         env_file:
             - .env.list
         links:
-            - selenium
+            - hub
         environment:
             - MONGODB_URI=mongodb://mongo:27017/
 volumes:

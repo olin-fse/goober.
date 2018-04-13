@@ -1,5 +1,6 @@
 exports.config = {
-
+    host: 'hub',
+    port: 4444,
     //
     // ==================
     // Specify Test Files
@@ -45,9 +46,9 @@ exports.config = {
         maxInstances: 5,
         //
         browserName: 'chrome',
-        chromeOptions:{
-            args: ['--headless', '--disable-gpu'],
-        },
+        // chromeOptions:{
+        //    args: ['--headless', '--disable-gpu'],
+        //},
     }],
     //
     // ===================

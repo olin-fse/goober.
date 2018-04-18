@@ -33,4 +33,4 @@ matrix:
         provider: script
         script: docker push olinfse/goober:latest
         on:
-            branch: seungin/docker_setup
+            branch: master

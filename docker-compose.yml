@@ -7,17 +7,9 @@ services:
         volumes:
             - 'mongo:/data/db'
     chrome:
-        image: 'selenium/node-chrome:3.11.0-californium'
-        volumes:
-            - /dev/shm:/dev/shm
-        depends_on:
-            - hub
-        environment:
-            HUB_HOST: hub
-    hub:
-        image: 'selenium/hub:3.11.0-californium'
+        image: 'selenium/standalone-chrome:3.8.1-bohrium'
         ports:
-            - "4444:4444"
+            - '4444:4444'
     goober:
         tty: true
         stdin_open: true
@@ -33,7 +25,7 @@ services:
         env_file:
             - .env.list
         links:
-            - hub
+            - chrome
         environment:
             - MONGODB_URI=mongodb://mongo:27017/
 volumes:

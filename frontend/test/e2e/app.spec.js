@@ -18,6 +18,7 @@ const goo = {title: 'test',
 
 describe('goober home page, ', function() {
   beforeAll(function(){
+      console.log(rootPath)
       axios.delete(rootPath +'/goos'); // deletes all goo before testing
       axios.post(rootPath +'/goos', goo);// add a test goo, retrieve its id
       browser.url(rootPath);

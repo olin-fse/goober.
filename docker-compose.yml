@@ -1,0 +1,32 @@
+version: '3.6'
+services:
+    mongo:
+        image: 'mongo:3.4.1'
+        ports:
+            - '27017:27017'
+        volumes:
+            - 'mongo:/data/db'
+    chrome:
+        image: 'selenium/standalone-chrome:3.8.1-bohrium'
+        ports:
+            - '4444:4444'
+    goober:
+        tty: true
+        stdin_open: true
+        depends_on:
+            - 'mongo'
+        build:
+            context: .
+            cache_from:
+                - olinfse/goober:latest
+        command: node server.js
+        ports:
+            - '8080:8080'
+        env_file:
+            - .env.list
+        links:
+            - chrome
+        environment:
+            - MONGODB_URI=mongodb://mongo:27017/
+volumes:
+    mongo:

@@ -194,7 +194,6 @@ describe('New Goo Page', function(){
 
         // submit and wiat until to be redirected
         browser.click('.submitButton');
-        expect('.formToast').to.be.visible(1000);
         browser.waitUntil(function(){
             return browser.getUrl()===(rootPath+'/');
         }, 5000);

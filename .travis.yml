@@ -25,12 +25,12 @@ matrix:
         - sudo docker-compose up --detach
         - sudo docker-compose run goober /bin/bash -c "npm run test"
         - sudo docker-compose run goober /bin/bash -c "cd frontend;npm run e2e"
-    after_script:
-        - docker images
     before_deploy:
         - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+        - docker build -t goober .
+        - docker tag goober olinfse/goober:latest
     deploy:
         provider: script
-        script: docker push olinfse/goober
+        script: docker push olinfse/goober:latest
         on:
             branch: seungin/docker_setup

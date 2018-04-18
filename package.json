@@ -10,10 +10,10 @@
     "description": "Goober. is an online events organization service for small local communities. Goober supports users like pick-up sports players, acquaintances, meetup group organizers to create, share, and join upcoming events.",
     "main": "server.js",
     "scripts": {
-        "test": "NODE_ENV=test jest",
+        "test": "NODE_ENV=test jest --forceExit",
         "start": "nodemon server.js",
         "server": "nohup node server.js &",
-        "build": "cd frontend; npm run build"
+        "build": "cd frontend; npm install; npm run build; cd .."
     },
     "repository": {
         "type": "git",
@@ -33,9 +33,7 @@
         "mongoose": "^5.0.3",
         "passport": "^0.4.0",
         "passport-facebook": "^2.1.1",
-        "path": "^0.12.7"
-    },
-    "devDependencies": {
+        "path": "^0.12.7",
         "jest": "^22.2.1",
         "superagent": "^3.8.2",
         "supertest": "^3.0.0"

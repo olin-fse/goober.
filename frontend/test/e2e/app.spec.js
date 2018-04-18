@@ -4,8 +4,7 @@ const axios = require('axios');
 chai.use(chaiWebdriver(browser));
 const expect = chai.expect;
 const port = process.env.PORT | 8080;
-const rootPath = 'http://localhost:' + port;
-
+const rootPath = (process.env.DOCKER_GOOBER_URL || 'http://localhost:') + port;
 const testTime = new Date();
 const goo = {title: 'test',
              description: 'test',
@@ -18,6 +17,7 @@ const goo = {title: 'test',
 
 describe('goober home page, ', function() {
   beforeAll(function(){
+      console.log(rootPath)
       axios.delete(rootPath +'/goos'); // deletes all goo before testing
       axios.post(rootPath +'/goos', goo);// add a test goo, retrieve its id
       browser.url(rootPath);
@@ -193,7 +193,6 @@ describe('New Goo Page', function(){
 
         // submit and wiat until to be redirected
         browser.click('.submitButton');
-        expect('.formToast').to.be.visible(1000);
         browser.waitUntil(function(){
             return browser.getUrl()===(rootPath+'/');
         }, 5000);

@@ -1,6 +1,6 @@
 var db_config = {
     test: {
-        uri : 'mongodb://localhost/test',
+        uri : process.env.MONGODB_URI+'test' || 'mongodb://localhost/test',
         database: {
             host:   '127.0.0.1',
             port:   '27017',
@@ -8,7 +8,7 @@ var db_config = {
         },
     },
     dev: {
-        uri : process.env.MONGODB_URI || 'mongodb://localhost/goober',
+        uri : process.env.MONGODB_URI+'goober' || 'mongodb://localhost/goober',
         database: {
             host: '127.0.0.1',
             port: '27017',
